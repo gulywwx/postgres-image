@@ -900,7 +900,10 @@ def write_wale_environment(placeholders, prefix, overwrite):
         write_envdir_names = ssh_names + walg_names
     # xxf        
     elif wale.get("WALG_FILE_PREFIX"):
-        write_envdir_names = file_names + walg_names      
+        write_envdir_names = file_names + walg_names  
+        if not os.path.exists(placeholders['WALG_FILE_PREFIX']):
+            os.makedirs(placeholders['WALG_FILE_PREFIX'])
+            os.chmod(placeholders['WALG_FILE_PREFIX'], 0o1777)            
     else:
         return
 
